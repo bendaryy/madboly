@@ -429,7 +429,7 @@
                                                     <div class="mb-3">
                                                         <label for="inputProductTitle"
                                                             class="form-label">@lang("site.Line Item")</label>
-                                                        <select name="itemCode[]" id="itemCode"
+                                                        <select name="itemCode[]" onchange="bigOne()"  id="itemCode"
                                                             class="form-control form-control-sm form-select single-select" required>
                                                             @foreach ($products as $product)
                                                                 <option value="{{ $product['codeLookupValue'] }}"
@@ -717,7 +717,7 @@
                              <div class="mb-3">
                                 <label for="inputProductTitle"
                                     class="form-label">@lang("site.Line Item")</label>
-                                <select name="itemCode[]" id="itemCode"
+                                <select name="itemCode[]" onchange="bigOne${i}()" id="itemCode${i}"
                                                             class="form-control form-control-sm form-select single-select" required>
                                                             @foreach ($products as $product)
                                                                 <option value="{{ $product['codeLookupValue'] }}"
@@ -728,7 +728,7 @@
                              </div>
                                 <div class="mb-3">
                                     <label for="inputProductDescription" class="form-label">@lang("site.Line Decription") ${i}</label>
-                                    <textarea name="invoiceDescription[]" required class="form-control" id="inputProductDescription" rows="2"></textarea>
+                                    <textarea name="invoiceDescription[]" onchange="bigOne${i}()" required class="form-control" id="inputProductDescription${i}" rows="2"></textarea>
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -855,7 +855,7 @@
                         '");var totalItemDiscount = document.getElementById("totalItemsDiscount' + i +
                         '");var itemsDiscount = document.getElementById("itemsDiscount' + i +
                         '");var allSalesTotal =  salesTotal.value = (quantity' + i +
-                        '.value * amounEGP.value).toFixed(2);var allNetTotal = netTotal.value = (salesTotal.value - discount.value).toFixed(2);t2valueEnd.value = ((allNetTotal* T2rate.value) / 100).toFixed(2);t4Amount.value = ((allNetTotal* T4ValueEnd.value) / 100).toFixed(2);totalItemDiscount.value = (parseFloat(netTotal.value) + parseFloat(t2valueEnd.value) - parseFloat(t4Amount.value) - parseFloat(itemsDiscount.value)).toFixed(2);};   </' + 'script>').appendTo('#test123');
+                        '.value * amounEGP.value).toFixed(2);var allNetTotal = netTotal.value = (salesTotal.value - discount.value).toFixed(2);t2valueEnd.value = ((allNetTotal* T2rate.value) / 100).toFixed(2);t4Amount.value = ((allNetTotal* T4ValueEnd.value) / 100).toFixed(2);totalItemDiscount.value = (parseFloat(netTotal.value) + parseFloat(t2valueEnd.value) - parseFloat(t4Amount.value) - parseFloat(itemsDiscount.value)).toFixed(2); var DescFill = document.getElementById("itemCode'+i+'"); var FinalText = DescFill.options[DescFill.selectedIndex].text; document.getElementById("inputProductDescription'+i+'").innerHTML = FinalText;};  </' + 'script>').appendTo('#test123');
                 $(document).on('click', '.btn_remove', function() {
                     var button_id = $(this).attr("id");
                     $("#row" + button_id + "").remove()
@@ -994,7 +994,9 @@
             var totalAmountOfDiscount = document.getElementById("totalAmount");
 
             document.getElementById("totalAmount2").value = (totalAmountOfDiscount.value - ExtraDiscount.value).toFixed(2);
-
+             var DescFill = document.getElementById("itemCode");
+            var FinalText = DescFill.options[DescFill.selectedIndex].text;
+            document.getElementById("inputProductDescription").innerHTML = FinalText;
         }
 
 
